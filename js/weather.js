@@ -10,25 +10,24 @@ elInput.keyup(function(evt) {
 })
 
 searchFetch();
-function searchFetch() {
+async function searchFetch() {
     startLoader()
-    fetch(`${API_URL}goweather.herokuapp.com/weather/${defaultCity}`)
-        .then(res => res.json())
-        .then(data => {
-            currentWeather.forecast = data.forecast;
-            currentWeather.title = defaultCity;
-            endLoader()
+    const response = await fetch(`${API_URL}goweather.herokuapp.com/weather/${defaultCity}`);
+    const responseJSON = await response.json()
 
-            $('.temperature').text(data.temperature);
-            $('.wind').text(`Wind: ${data.wind}`);
-            $('.description').text(`Description: ${data.description}`);
-            $('.city__name').text(`${defaultCity.toUpperCase()}`);
+    currentWeather.forecast = responseJSON.forecast;
+    currentWeather.title = defaultCity;
+    endLoader()
 
-            if(data.description == '') {
-                reflash()
-            }
-            renderWeather()
-        })
+    $('.temperature').text(responseJSON.temperature);
+    $('.wind').text(`Wind: ${responseJSON.wind}`);
+    $('.description').text(`Description: ${responseJSON.description}`);
+    $('.city__name').text(`${defaultCity.toUpperCase()}`);
+
+    if(responseJSON.description == '') {
+        reflash()
+    }
+    renderWeather()
 }
 
 function renderWeather() {

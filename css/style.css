@@ -27,8 +27,26 @@ html, body {
     width: 100%;
 }
 
-body {
+/* body {
     overflow: hidden;
+} */
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+/* scrolning uzini stylesi */
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    background-color:#fff;
+    border-radius: 10px;
+}
+
+/* scroll ichidagi scrolcha style */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background:#666;
 }
 
 .first-page {
